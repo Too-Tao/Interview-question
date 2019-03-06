@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>margin负值方法实现自适应</title>
+  <style>
+    html,body {
+      margin: 0;
+      height: 100%;
+    }
+    #main {
+      width: 100%;
+      height: 500px;
+      float: left;
+    }
+    #main #body {
+      margin: 0 210px;
+      height: 500px;
+      background: green;
+    }
+    #left, #right {
+      float: left;
+      width: 200px;
+      height: 500px;
+      background: red;
+    }
+    #left {
+      margin-left: -100%;
+    }
+    #right {
+      margin-left: -200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <div id="body"></div>
+  </div>
+  <div id="left"></div>
+  <div id="right"></div>
+  
+</body>
+</html>
