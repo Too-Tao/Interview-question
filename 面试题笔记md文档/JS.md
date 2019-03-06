@@ -1,8 +1,100 @@
 # typeof 与 instanceof
-1. typeof 除了 null 都可以显示正确的类型  typeof null 返回 Object 是个Bug(讲道理是返回null)
-2. typeof 除了函数返回 function 其余的都返回 Object，所以不能准确判断变量到底是什么类型
+## typeof
+	1.typeof 除了 null 都可以显示正确的类型  typeof null 返回 Object 是个Bug(讲道理是返回null)
+	2.typeof 除了函数返回 function 其余的都返回 Object，所以不能准确判断变量到底是什么类型
+## instanceof
+```
+const Person = function(){}
+const p1 = new Person
+p1 instanceof Person //true
 
+var str = 'hello world'
+str instanceof String // false
 
+var str1 = new String('hello world')
+str1 instanceof String // true
+```
+1. instanceof 它判断的机制是通过原型链判断的
+2. 对于原始类型并不能通过**instanceof**直接判断类型
+```
+class PrimitiveString {
+  static [Symbol.hasInstance](x) {
+    return typeof x === 'string'
+  }
+}
+console.log('hello world' instanceof PrimitiveString) // true
+```
+* Symbol.hasInstance 是一个可以让我们自定义instanceof行为的东西。这从侧面反应一个问题，instanceof也不是百分百可信的
+
+# this
+![img](https://github.com/Too-Tao/Interview-question/blob/master/%E5%9B%BE%E8%A7%A3this%E6%8C%87%E5%90%91%E9%97%AE%E9%A2%98.png)
+1. 寻找函数foo中的this
+2. 判断函数类型
+   * 箭头函数(包裹箭头函数的第一个普通函数中的this)
+   * bind、call、apply(this是第一个参数)
+   * 普通函数(函数是如何被调用的)
+		1. new 的方式
+			* this被固化在实例上
+		2. 除了new 的方式
+			* foo() 还是 obj.foo()
+			1. foo() this为window
+			2. this 为 obj
+   
+# '==' VS '==='
+## == 和 === 有什么区别？
+### 对于 '==' 来说，如果对比双方类型**不一样**的话，就会进行**类型转换**
+**string、boolean都会转Number**  
+**Object转基本类型**
+
+# 浅拷贝
+## 可以通过Object.assign来解决这个问题，Object.assign只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址。
+```
+let a = {
+	age: 1
+}
+let b = Object.assign({},a)
+a.age = 2
+console.log(b.age) //1
+```
+## ...运算符来实现浅拷贝
+```
+let a = {
+  age: 1
+}
+let b = { ...a }
+a.age = 2
+console.log(b.age) // 1
+```
+# 深拷贝
+## 通常可以通过 ***JSON.parse(JSON.stringify(object))*** 来解决
+
+# 原型
+---
+# ES6部分
+# var、let、const 区别
+	1.函数提升优先于变量提升，函数提升会把整个函数挪到作用域顶部，变量提升只会把声明挪到作用域顶部
+	2.var 存在提升，我们能在声明之前使用。let、const 因为暂时性死区的原因，不能在声明前使用
+	3.var 在全局作用域下声明变量会导致变量挂载在 window 上，其他两者不会
+	4.let 和 const 作用基本一致，但是后者声明的变量不能再次赋值
+	5.前者的作用范围是块级作用域，而后者的作用范围是函数作用域
+
+# 模块化
+## 为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？
+### 使用模块化可以给我们带来以下好处
+	1.解决命名冲突
+	2.提供复用性
+	3.提高代码可维护性
+### 立即执行函数
+ 	立即执行函数实现模块化是常见的手段，通过函数作用域解决了命名冲突、污染全局作用域的问题
+### AMD 和 CMD
+### CommonJS
+	最早在node中使用
+#### require
+### ES Module 与 CommonJS有几个区别
+	1.CommonJS 支持动态导入，也就是 require(${path}/xx.js)，后者目前不支持，但是已有提案
+	2.CommonJS 是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响
+	3.CommonJS 在导出时都是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是 ES Module 采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化
+	4.ES Module 会编译成 require/exports 来执行的
 # Ajax请求
 
 1. 创建一个XMLHttpRequest 对象  
