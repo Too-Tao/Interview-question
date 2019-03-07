@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JS实现倒计时</title>
+</head>
+<body>
+  <div class="demo"></div>
+  <script>
+    (function(){
+      let time = 5
+      var demo = document.querySelector('.demo')
+      var set = setInterval(function() {
+        time--
+        demo.innerHTML = time
+        console.log(time)
+        if(time === 0) {
+          demo.innerHTML = '时间到啦！'
+          clearInterval(set)
+        }
+      },1000)
+    })()
+  </script>
+</body>
+</html>
