@@ -1,3 +1,32 @@
+# null 与 undefined
+## 相似性
+`undefined == null // true `  
+>在if语句中undefined和null 都会被自动转换为false
+```
+if (!undefined) {
+	console.log("undefined is false")
+}
+if (!null) {
+	console.log("null is false")
+}
+undefined == null //true
+```
+## 最初设计
+### JavaScript的最初版本：null是一个表示“无”的对象，转为数值时为0
+### undefined是一个表示“无”的原始值，转为数值时为NaN
+```
+Number(undefined)
+5 + undefined //NaN
+```
+## 目前的用法
+### null表示没有对象，即该处不应该有值
+	1.作为函数的参数，表示该函数的参数不是对象
+	2.作为对象原型链的终点
+### undefined表示“缺少值”，就是此处应该有个值，但是还没有定义
+	1.变量被申明了，但是没有赋值时，就等于undefined
+	2.调用函数时，应该提供的参数没有提供，该参数等于undefined
+	3.对象没有赋值的属性，该属性的值为undefined
+	4.函数没有返回值时，默认返回undefined
 # typeof 与 instanceof
 ## typeof
 	1.typeof 除了 null 都可以显示正确的类型  typeof null 返回 Object 是个Bug(讲道理是返回null)
