@@ -71,3 +71,44 @@ transform: translate(-50%, -50%);
     margin: auto
     }
 ```
+# 一像素边框
+## border-image 图片实现
+````
+.border-image-1px {
+  border-width: 1px 0px;
+  boder-image: url('...'2 0 stretch)
+}
+````
+## background-image 渐变实现
+```
+.border {
+      background-image:linear-gradient(180deg, red, red 50%, transparent 50%),
+      linear-gradient(270deg, red, red 50%, transparent 50%),
+      linear-gradient(0deg, red, red 50%, transparent 50%),
+      linear-gradient(90deg, red, red 50%, transparent 50%);
+      background-size: 100% 1px,1px 100% ,100% 1px, 1px 100%;
+      background-repeat: no-repeat;
+      background-position: top, right top,  bottom, left top;
+      padding: 10px;
+  }
+```
+## viewport + rem 实现
+## box-shadow实现
+```
+div{
+    -webkit-box-shadow:0 1px 1px -1px rgba(0, 0, 0, 0.5);
+}
+```
+## transform:scale(0.5) 实现
+1. 用**height: 1px**的div，然后根据媒体查询设置**transform:scaleY(0.5)**
+```
+div{
+    height:1px;
+    background:#000;
+    -webkit-transform: scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    overflow: hidden;
+}
+```
+2. 用::after和::befor,设置border-bottom：1px solid #000,然后在缩放-webkit-transform: scaleY(0.5);可以实现两根边线的需求
+3. 用::after设置border：1px solid #000; width:200%; height:200%,然后再缩放scaleY(0.5); 优点可以实现圆角，京东就是这么实现的，缺点是按钮添加active比较麻烦
