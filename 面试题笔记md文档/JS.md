@@ -1,3 +1,18 @@
+# JS 中的内置对象  （11个）
+|对象|对象名称|
+| ---- | ---- |
+| Argunments    | 函数参数集合    |
+| Array    | 数组    |
+| Boolean    | 布尔对象    |
+| Date    | 时期事件    |
+| Error    | 异常对象    |
+| Function    | 函数构造器    |
+| Math    | 数字对象    |
+| Number    | 数值对象    |
+| Object    | 基础对象    |
+| RegExp    | 正则表达式对象    |
+| String    | 字符串对象    |
+
 # null 与 undefined
 ## 相似性
 `undefined == null // true `  
@@ -153,3 +168,21 @@ xhr.open('GET','url')
 5. 使用send方法发送请求  
 `xhr.send()`
 
+# Event Loop
+## 执行栈（5个关键点）
+	1.单线程
+	2.同步执行
+	3.一个全局环境
+	4.无限的函数环境
+	5.函数被调用就会创建一个新的执行栈环境
+## 宏任务与微任务
+### 宏任务
+优先级：主代码块>setImmediate>MessageChannel> serTimeout / setInterval
+### 微任务
+优先级：process.nextTick > Promise > MutationObserver
+
+## Event Loop 执行顺序
+	1.首先执行同步代码，这属于宏任务
+	2.当执行所有同步代码后，执行栈为空，查询是否有异步代码需要执行
+	3.执行所有微任务后，如有必要会渲染页面
+	4.然后开始下轮Event Loop，执行宏任务中的异步代码，也就是 setTimeout 中的回调函数

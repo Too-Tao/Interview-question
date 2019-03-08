@@ -32,3 +32,56 @@
 var myDiv = document.getElementByid('myDiv')
 var value = myDiv.dataset.attribute
 ```
+# 浏览器内核
+    1.IE: trident 内核
+    2.Firefox ： gecko 内
+    3.Safari:webkit 内核
+    4.Opera: 以前是 presto 内核， Opera 现已改用 Google Chrome 的 Blink 内核
+    5.Chrome:Blink( 基于 webkit ， Google 与 Opera Software 共同开发 )
+# HTML文件里开头都有个很重要的东西，Doctype
+声明位于文档中的最前面的位置，处于标签之前。此标签可告知浏览器文档使用哪种 HTML 或 XHTML 规范。（重点：告诉浏览器按照何种规范解析页面）
+# 请你描述一下 cookies，sessionStorage 和 localStorage 的区别?
+    1.sessionStorage 和 localStorage 是 HTML5 Web Storage API 提供的，可以方便的在 web 请求之间保存数据。有了本地数据，就可以避免数据在浏览器和服务器间不必要地来回传递。
+
+    2.sessionStorage、 localStorage 、 cookie 都是在浏览器端存储的数据，其中 sessionStorage 的概念很特别，引入了一个“浏览器窗口”的概念。 sessionStorage 是在同源的同窗口（或 tab ）中，始终存在的数据。也就是说只要这个浏览器窗口没有关闭，即使刷新页面或进入同源另一页面，数据仍然存在。关闭窗口后， sessionStorage 即被销毁。同时“独立”打开的不同窗口，即使是同一页面， sessionStorage 对象也是不同的
+
+    3.cookies会发送到服务器端。其余两个不会。
+
+    4.Microsoft 指出 Internet Explorer 8 增加 cookie 限制为每个域名 50 个，但 IE7 似乎也允许每个域名 50 个 cookie 。 Firefox 每个域名 cookie 限制为 50 个。 Opera 每个域名 cookie 限制为 30 个。 Firefox 和 Safari 允许 cookie 多达 4097 个字节，包括名（ name ）、值（ value ）和等号。 Opera 许 cookie 多达 4096 个字节，包括：名（ name ）、值（ value ）和等号。 Internet Explorer 允许 cookie 多达 4095 个字节，包括：名（ name ）、值（ value ）和等号。
+
+## 区别
+
+### Cookie
+
++ 每个域名存储量比较小（各浏览器不同，大致 4K ）
+
++ 所有域名的存储量有限制（各浏览器不同，大致 4K ）
+
++ 有个数限制（各浏览器不同）
+
++ 会随请求发送到服务器
+
+### LocalStorage
+
++ 永久存储
+
++ 单个域名存储量比较大（推荐 5MB ，各浏览器不同）
+
++ 总体数量无限制
+
+### SessionStorage
+
++ 只在 Session 内有效
+
++ 存储量更大（推荐没有限制，但是实际上各浏览器也不同
+
+# link 与 @import 间的区别
+    两者都是外部引用CSS的方式，但是存在一定的区别：
+
+    区别1： link 是 XHTML 标签，除了加载 CSS 外，还可以定义 RSS 等其他事务； @import 属于 CSS 范畴，只能加载 CSS 。
+
+    区别2： link 引用 CSS 时，在页面载入时同时加载； @import 需要页面网页完全载入以后加载。
+
+    区别3： link 是 XHTML 标签，无兼容问题； @import 是在 CSS2.1 提出的，低版本的浏览器不支持。
+
+    区别4： link 支持使用 Javascript 控制 DOM 去改变样式；而 @import 不支持。

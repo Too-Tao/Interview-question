@@ -126,3 +126,14 @@ div{
 ```
 2. 用::after和::befor,设置border-bottom：1px solid #000,然后在缩放-webkit-transform: scaleY(0.5);可以实现两根边线的需求
 3. 用::after设置border：1px solid #000; width:200%; height:200%,然后再缩放scaleY(0.5); 优点可以实现圆角，京东就是这么实现的，缺点是按钮添加active比较麻烦
+
+# 隐藏元素的方法（8种）
+    1.overflow:hidden
+    2.opacity: 0
+    3.visibility: hidden
+    4.display: none
+    5.position: aboslute (left:-99999;right:-99999)
+    6.clip(clip-path): rect() / inset() / polygon()
+    7.z-index: -1000
+    8.transform: scaleY(0)
+
