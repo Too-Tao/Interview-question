@@ -3,47 +3,15 @@
 * 新建一新数组，遍历传入数组，值不在新数组就push进该新数组中
 * IE8以下不支持数组的indexOf方法
 * */
-// function uniq(array){
-//   var temp = []; //一个新的临时数组
-//   for(var i = 0; i < array.length; i++){
-//       if(temp.indexOf(array[i]) == -1){
-//           temp.push(array[i]);
-//       }
-//   }
-//   return temp;
-// }
-
-// var aa = [1,2,2,4,9,6,7,5,2,3,5,6,5];
-// console.log(uniq(aa));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function uniq (array){
-  var temp = []
-  for (var i=0; i < array.length; i++){
-    if(temp.indexOf(array[i]) == -1){
-      temp.push(array[i])
-    }
+function uniq(array){
+  var temp = []; //一个新的临时数组
+  for(var i = 0; i < array.length; i++){
+      if(temp.indexOf(array[i]) == -1){
+          temp.push(array[i]);
+      }
   }
-  return temp
+  return temp;
 }
 
-var aa = ['1','1','2','3','3','3','4']
-
-console.log(uniq(aa))
+var aa = [1,2,2,4,9,6,7,5,2,3,5,6,5];
+console.log(uniq(aa));
