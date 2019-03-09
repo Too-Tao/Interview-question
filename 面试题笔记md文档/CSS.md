@@ -136,4 +136,16 @@ div{
     6.clip(clip-path): rect() / inset() / polygon()
     7.z-index: -1000
     8.transform: scaleY(0)
-
+# 堆叠上下文
+## 堆叠上下文规则
+    1.文档的根元素(html元素)
+    2.元素拥有position属性(即position属性为除开static的其他值)，同时设置了不为auto的z-index属性值
+    3.元素拥有opacity，且取值小于1
+    4.一些新的css属性，如filters,css-regions,paged media 等需要离屏渲染的属性，均能使元素形成堆叠上下文
+    5.指定position:fixed属性，即z-index为auto
+## 同一堆叠上下文内子元素的堆叠顺序（从底层到上层）
+    1.堆叠上下文的根元素
+    2.设置了position属性，并且z-index为负的元素及其子元素，z-index值交打的元素置于较小值元素之上，同等属性值的元素按照html中出现的先后顺序堆叠
+    3.没有设置position的元素
+    4.设置了position属性，并且z-index属性为auto的元素
+    5.设置position属性，并且z-index属性为正值的元素
