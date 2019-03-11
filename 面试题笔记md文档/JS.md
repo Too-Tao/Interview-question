@@ -139,6 +139,137 @@ console.log(b.age) // 1
 	2.CommonJS 是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响
 	3.CommonJS 在导出时都是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是 ES Module 采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化
 	4.ES Module 会编译成 require/exports 来执行的
+
+# ES6 新增哪些新特性
+	1.let和const命令
+	2.变量的结构赋值
+	3.字符串的扩展
+	4.数值的扩展
+	5.数组的扩展
+	6.对象的扩展
+	7.函数的扩展
+	8.Set和Map数据结构
+	9.遍历器
+	10.Generator函数
+	11.Promise对象
+	12.Class
+	13.Module
+## let和const命令
+### let
+	1.let不会像var一样声明提前，只能在定义之后使用，之前使用会抛出ReferenceError；
+	2.并且只要作用域内有let声明的变量，这个变量就会被绑定，不受原来变量声明规则的影响。即ES6明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些命令，就会报错。这在语法上，称为“暂时性死区”
+	3.函数的作用域是其声明时所在的作用域。
+	4.不允许在相同作用域内，重复声明同一个变量。因此，不能在函数内部重新声明参数。
+### const
+	1.对常量重新赋值不会报错，只会默默地失败。
+	2.与let命令相同，只在声明所在的块级作用域内有效。
+	3.const命令也不存在提升，只能在声明的位置后面使用，提前使用同样会抛出ReferenceError。
+	4.同样不可重复声明。
+	5.const命令只是指向变量所在的地址，如果将const变量赋值为一个对象，则此常量储存的是一个地址，不可变的只是这个地址，但对象本身是可变的，依然可以为其添加新属性。如果真的想将对象冻结，应该使用Object.freeze方法。
+## 变量的结构赋值
+## 字符串的扩展
+### 增加的处理方法
+* codePointAt()：会正确返回四字节的UTF-16字符的码点，对于那些两个字节储存的常规字符，它的返回结果与charCodeAt方法相同。
+* String.fromCodePoint()：正确返回编号大于0xFFFF的码点对应的字符，弥补了String.fromCharCode方法的不足。
+* at()：返回字符串给定位置的字符，如果该字符的Unicode编号大于0xFFFF，可以返回正确的字符。而charAt()方法只能返回UTF-16编码的第一个字节，不能正确返回。
+* 字符的Unicode表示法："\u{20BB7}"的形式可以正确表示超出\uFFFF的双字节字符。
+* 正则表达式的u修饰符：对于正则表达式中的.字符、\u{20BB7}大括号字符、量词、\S、i修饰符等，如果需要正确识别码点编号大于0xFFFF的字符，必须添加了u修饰符。
+* normalize()：ES6提供String.prototype.normalize()方法，用来将Unicode中字符的不同表示方法统一为同样的形式。（目前不能识别三个或三个以上字符的合成。）
+* includes()：返回布尔值，表示是否找到了参数字符串。支持第二个参数，表示开始搜索的位置
+* startsWith()：返回布尔值，表示参数字符串是否在源字符串的头部。支持第二个参数，表示开始搜索的位置。
+* endsWith()：返回布尔值，表示参数字符串是否在源字符串的尾部。支持第二个参数，表示对前n个字符进行搜索。
+* repeat()：返回一个新字符串，表示将原字符串重复n次。
+* “粘连”（sticky）修饰符y：全局匹配，后一次匹配都从上一次匹配成功的下一个位置开始，y修饰符确保匹配必须从剩余的第一个位置开始。换而言之，y修饰符号隐含了头部匹配的标志ˆ。
+### 字符串模板
+	在模板字符串中嵌入变量，需要将变量名写在${}之中。
+	如果在模板字符串中需要使用反引号，则前面要用反斜杠转义。
+	大括号内部可以进行运算，以及引用对象属性，其中还能调用函数。
+## 数值的扩展
+### 扩展函数
+* Number.isFinite()用来检查一个数值是否非无穷（infinity）；Number.isNaN()用来检查一个值是否为NaN。它们与传统的全局方法isFinite()和isNaN()的区别在于，传统方法先调用Number()将非数值的值转为数值，再进行判断，而这两个新方法只对数值有效，非数值一律返回false。
+
+* Number.parseInt(), Number.parseFloat()：ES6将全局方法parseInt()和parseFloat()，移植到Number对象上面，行为完全保持不变。
+
+* Number.isInteger()：用来判断一个值是否为整数。需要注意的是，在JavaScript内部，整数和浮点数是同样的储存方法，所以3和3.0被视为同一个值。
+
+* Number.isSafeInteger()则是用来判断一个整数是否落在Number.MAX_SAFE_INTEGER和		Number.MIN_SAFE_INTEGER这两个常量表示的上下限范围内
+#### 提供了许多数学方法：
+* Math.trunc(x)方法用于去除一个数的小数部分，返回整数部分；
+* Math.sign(x)方法用来判断一个数到底是正数、负数、还是零；
+* Math.acosh(x) 返回x的反双曲余弦（inverse hyperbolic cosine）；
+* Math.asinh(x) 返回x的反双曲正弦（inverse hyperbolic sine）；
+* Math.atanh(x) 返回x的反双曲正切（inverse hyperbolic tangent）；
+* Math.cbrt(x) 返回x的立方根；
+* Math.clz32(x) 返回x的32位二进制整数表示形式的前导0的个数；
+* Math.cosh(x) 返回x的双曲余弦（hyperbolic cosine）；
+* Math.expm1(x) 返回eˆx - 1；
+* Math.fround(x) 返回x的单精度浮点数形式；
+* Math.hypot(...values) 返回所有参数的平方和的平方根；
+* Math.imul(x, y) 返回两个参数以32位整数形式相乘的结果；
+* Math.log1p(x) 返回1 + x的自然对数；
+* Math.log10(x) 返回以10为底的x的对数；
+* Math.log2(x) 返回以2为底的x的对数；
+* Math.tanh(x) 返回x的双曲正切（hyperbolic tangent）。
+## 数组的扩展
+### 数组推导
+	数组推导就是直接通过现有数组生成新数组的一种简化写法，通过for...of结构，允许多重循环。注：新数组会立即在内存中生成，这时如果原数组是一个很大的数组，将会非常耗费内存。
+### 数组处理的扩展方法
+	Array.from():
+	用于将两类对象转为真正的数组：类似数组的对象（array-like object）和可遍历（iterable）的对象，其中包括ES6新增的Set和Map结构。Array.from()还可以接受第二个参数，作用类似于数组的map方法，用来对每个元素进行处理。
+	Array.of()方法
+	用于将一组值，转换为数组。弥补数组构造函数Array()的不足。
+## 对象的扩展
+### 增强的对象的写法
+### Object.is()和Object.assign()
+	Object.is()：用来比较两个值是否严格相等。它与严格比较运算符（===）的行为基本一致，不同之处只有两个：一是+0不等于-0，二是NaN等于自身。
+
+	Object.assign()：用来将源对象（source）的所有可枚举属性，复制到目标对象（target）。它至少需要两个对象作为参数，第一个参数是目标对象，后面的参数都是源对象。如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
+### propt属性
+	Proxy用于修改某些操作的默认行为，等于在目标对象之前，架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。而Proxy.revocable()方法则返回一个可取消的Proxy实例。
+### Symbol
+	Symbol是一种新的原始数据类型，表示独一无二的ID，它通过Symbol函数生成。凡是属性名属于Symbol类型，就都是独一无二的，可以保证不会与其他属性名产生冲突。Symbol函数可以接受一个字符串作为参数，表示Symbol实例的名称。
+### Proxy
+## 函数的扩展
+### 箭头函数
+### rest运算符(...)
+### 函数参数的默认值
+## Set和Map数据结构
+### 数据结构set
+Set结构有以下属性
+	1.Set.prototype.constructor：构造函数，默认就是Set函数。
+	2.Set.prototype.size：返回Set的成员总数。
+Set数据结构有以下方法
+	1.add(value):添加某个值，返回Set结构本身
+	2.delete(value):删除某个值，返回一个布尔值，表示删除是否成功
+	3.has(value):返回一个布尔值，表示该值是否为Set的成员
+	4.clear():清除所有成员，没有返回值
+### 数据结构Map
+Map结构的属性和方法
+	1.size:返回成员总数
+	2.set(key,value):设置一个键值对
+	3.get(key):读取一个键
+	4.has(key):返回一个布尔值，表示某个键是否在Map数据结构中
+	5.delete(key):删除某个键
+	6.clear():清除所有成员
+	7.keys():返回键名的遍历器
+	8.values():返回键值的遍历器
+	9.entries():返回所有成员的遍历器
+## 遍历器
+## Generator函数
+	1.异步操作同步化
+	2.控制流管理：yield语句是同步运行，所以多层回调函数可以改写为直线执行的形式
+	3.在任意对象上部署iterator接口
+## Promise对象
+### Promise对象基本介绍
+#### 每个任务都有三种状态：默认(pending)、完成(fulfilled)、失败(rejected)
+#### Promise.all()、Promise.race()
+	Promise.all()用于将多个Promise实例包装成一个新的Promise实例
+	Promise.race()与Promise.all()形式类似，不同的是只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的Promise实例的返回值，就传递给p的返回值
+
+## Class
+## Module
+### export命令、import命令、module命令
+
 # Ajax请求
 
 1. 创建一个XMLHttpRequest 对象  
