@@ -318,6 +318,33 @@ Map结构的属性和方法
 ## Module
 ### export命令、import命令、module命令
 
+# 异步加载JS方式有哪些
+## 1.Script Dom Element
+使用DOM操作添加script
+```
+(funtion () {
+	var scriptEle = document.createElement("script")
+	scriptEle.type = "text/javasctipt"
+	scriptEle.async = true
+	scriptEle.src = "http://cdn.bootcss.com/jquery/3.0.0-beta1/jquery.min.js";
+	var x = document.getElementsByTagName("head")[0];
+	x.insertBefore(scriptEle, x.firstChild);
+})()
+```
+## 2.onload时异步加载
+将要插入的script方法放到一个函数里，然后放在window.onload()方法里执行
+## 3.$(document).ready()
+```
+$(document).ready(function() {
+        alert("加载完成！")
+      })
+```
+## 4.<script>标签中添加 async="async"属性
+```
+<script type="text/javascript" src="xxx.js" async="async"></script>
+```
+## 5.<script>标签的defer="defer"属性
+
 # Ajax请求
 
 1. 创建一个XMLHttpRequest 对象  

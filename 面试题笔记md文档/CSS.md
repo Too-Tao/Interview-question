@@ -149,3 +149,8 @@ div{
     3.没有设置position的元素
     4.设置了position属性，并且z-index属性为auto的元素
     5.设置position属性，并且z-index属性为正值的元素
+# link 与 @import 间的区别
+    1.link是XHTML标签，除了加载CSS外，还可以定义RSS等其他事务；@import属于CSS范畴，只能加载CSS
+    2.link引用CSS时，在页面载入时同时加载； @import需要页面网页完全载入后加载
+    3.link是XHTML标签，所以没有兼容性问题，@import是CSS2.1提出的，低版本浏览器不支持
+    4.link支持使用javascript控制DOM去改变样式，而@import不支持
