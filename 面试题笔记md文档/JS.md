@@ -42,6 +42,54 @@ Number(undefined)
 	2.调用函数时，应该提供的参数没有提供，该参数等于undefined
 	3.对象没有赋值的属性，该属性的值为undefined
 	4.函数没有返回值时，默认返回undefined
+# 函数的作用
+## 功能函数
+	1.把一块代码逻辑封装起来，以便于重复调用
+	2.传入参数返回结果
+	3.生命周期短，开始先创建一个内存空间，结束后释放内存空间。闭包是功能函数调用功能函数，生命周期长
+## 构造器函数
+# 如何面向对象的实现
+	1.使用构造器函数实现(通常都是名词)
+	2.调用的目的：拿到新开辟的内存的引用
+	3.生命周期的长度取决与引用什么时候结束，后回收内存空间
+```
+function Car () {
+
+}
+Car.prototype = {
+	start: function() {},
+	run: function() {},
+	move: function() {},
+	close: function() {},
+}
+```
+## 继承
+```
+Machine.prototype = {
+	start: function () {},
+	stop: function () {}
+}
+function Car(name,brand) {
+
+}
+Car.prototype = new Machine()
+Car.prototype.open = function(){}
+Car.prototype.close = function(){}
+
+var m1 = new Machine()
+console.log(m1)
+var c1 = new Car()
+c1.start()
+console.log(c1)
+```
+## __proto__ object new XXX()
+## prototype function 
+构造器的属性
+## constructor
+代表构造器函数是哪个函数
+# 闭包
+## 为什么闭包不会消失
+闭包他是通过函数调用，内外间持有数据的句柄，然而让里面的那块空间的生命周期不会消失，所有产生的这块独立的内存空间永远存在，并且这块空间多外是封闭的，所以我们称他为闭包
 # typeof 与 instanceof
 ## typeof
 	1.typeof 除了 null 都可以显示正确的类型  typeof null 返回 Object 是个Bug(讲道理是返回null)
