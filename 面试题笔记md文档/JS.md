@@ -119,7 +119,7 @@ console.log('hello world' instanceof PrimitiveString) // true
 * Symbol.hasInstance 是一个可以让我们自定义instanceof行为的东西。这从侧面反应一个问题，instanceof也不是百分百可信的
 
 # this
-![img](https://github.com/Too-Tao/Interview-question/blob/master/%E5%9B%BE%E8%A7%A3this%E6%8C%87%E5%90%91%E9%97%AE%E9%A2%98.png)
+![img](https://github.com/Too-Tao/Interview-question/blob/master/images/%E5%9B%BE%E8%A7%A3this%E6%8C%87%E5%90%91%E9%97%AE%E9%A2%98.png)
 1. 寻找函数foo中的this
 2. 判断函数类型
    * 箭头函数(包裹箭头函数的第一个普通函数中的this)
