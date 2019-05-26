@@ -359,7 +359,7 @@ xhr.onreadystatechange = function () {
 	if ( xhr.status === 200 ) {
 		return success( xhr.responseText )
 	} else {
-	      return fail ( xhr.status )  
+	      return fail ( xhr.status )
 	   }
        } else {
           	// HTTP请求还未结束
@@ -367,11 +367,11 @@ xhr.onreadystatechange = function () {
 }
 ```
 
-3. 使用open方法与服务器建立连接  
+3. 使用open方法与服务器建立连接
 `
 xhr.open('GET','url')
 `
-5. 使用send方法发送请求  
+5. 使用send方法发送请求
 `xhr.send()`
 
 # Event Loop
