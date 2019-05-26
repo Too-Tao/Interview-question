@@ -347,7 +347,7 @@ $(document).ready(function() {
 
 # Ajax请求
 
-1. 创建一个XMLHttpRequest 对象  
+1. 创建一个XMLHttpRequest 对象
 `
 var xhr = new XMLHttpRequest()
 `
