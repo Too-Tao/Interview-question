@@ -10,7 +10,7 @@
 # HTML5新增的语义化标签
 1. header元素
 2.footer元素
-3. hgroup元素  
+3. hgroup元素
 `hgroup元素代表“网页”或“section”的标题，当元素有多个层级时，该元素可以将h1到h6元素放在其内，譬如文章的主标题和副标题的组合`
 4. nav元素
 5. aside元素
@@ -21,7 +21,7 @@
 * 属性名不应该包含任何大写字母
 * 在前缀 "data-" 之后必须有至少一个字符属性值可以是任意字符串
 
-## 获取attrubute里的值 
+## 获取attrubute里的值
 使用dataset/getAttribute
 ```
 <div id="myDiv" data-attribute="value">
@@ -85,3 +85,29 @@ var value = myDiv.dataset.attribute
     区别3： link 是 XHTML 标签，无兼容问题； @import 是在 CSS2.1 提出的，低版本的浏览器不支持。
 
     区别4： link 支持使用 Javascript 控制 DOM 去改变样式；而 @import 不支持。
+
+# 什么是DOCTYPE，其作用是什么
+### DOCTYPE是用来声明文档类型和DTD规范，主要用于文件的合法校验。如果文件代码不合法，浏览器解析时会出错
+### DTD规范
+```
+DTD是一系列语法规则，用来定义XML或HTML的文件类型。浏览器会使用它来判断文档类型，决定使用何种协议来解析，以及切换浏览器模式
+```
+### 常见的DOCTYPE版本
+* HTML5 <!DOCTYPE html>
+* HTML 4.0.1 Strict (改DTD包含所有HTML元素，但不包括展示性和弃用的元素)
+* HTML 4.0.1 Transitional
+
+# 渲染机制类
+## 重排Reflow
+### DOM结构中的各个元素都有自己的盒子（模型），这些都需要浏览器根据各种样式来计算结果将元素放到它该出现的位置，这个过程称为reflow
+### 触发条件
+* 增加、删除、修改DOM节点时，会导致Reflow或者Repaint
+* 移动DOM的位置，或者制作动画
+* 修改CSS样式
+* 改变窗口大小，或者滚动
+* 修改网页默认字体
+## 重绘Repaint
+### 浏览器根据各个盒子的样式按照其各自的CSS特性绘制一边
+### 触发条件
+* DOM改动
+* CSS改动
